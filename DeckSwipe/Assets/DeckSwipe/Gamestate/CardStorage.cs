@@ -62,6 +62,7 @@ namespace DeckSwipe.Gamestate
 
         public void FillDrawableCard()
         {
+            drawableCards.Clear();
             foreach (Card card in Cards.Values)
             {
                 bool regular = (card.OnlyFollowup == false);

@@ -67,6 +67,7 @@ namespace DeckSwipe
             progressStorage.Save();
             daysLastRun = progressStorage.Progress.daysPassed - daysPassedPreviously;
             cardDrawQueue.Clear();
+            cardStorage.FillDrawableCard(); // TODO: reset card?
             StartGame();
         }
 
