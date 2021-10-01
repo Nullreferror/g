@@ -46,11 +46,14 @@ namespace DeckSwipe.Gamestate.Persistence
                 Progress = new GameProgress();
             }
             Progress.AttachReferences(cardStorage);
-            cardStorage.ResolvePrerequisites();
+            cardStorage.FillDrawableCard();
         }
 
         private async Task<GameProgress> LoadLocally()
         {
+            //TODO: add load
+            File.Delete(_gameProgressPath);
+
             if (File.Exists(_gameProgressPath))
             {
                 string progressJson;

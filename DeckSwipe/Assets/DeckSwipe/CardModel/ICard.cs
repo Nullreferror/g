@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DeckSwipe.CardModel.Prerequisite;
 using DeckSwipe.Gamestate;
 using UnityEngine;
 
@@ -17,7 +16,5 @@ namespace DeckSwipe.CardModel
         void CardShown(Game controller);
         void PerformLeftDecision(Game controller);
         void PerformRightDecision(Game controller);
-        void AddDependentCard(Card card);
-        void RemoveDependentCard(Card card);
     }
 }

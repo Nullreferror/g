@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using DeckSwipe.CardModel;
 using DeckSwipe.CardModel.Import;
 using DeckSwipe.CardModel.Import.Resource;
-using DeckSwipe.CardModel.Prerequisite;
 using UnityEngine;
 
 namespace DeckSwipe.Gamestate
@@ -33,24 +32,29 @@ namespace DeckSwipe.Gamestate
 
         public Card ForId(int id)
         {
-            Card card;
-            Cards.TryGetValue(id, out card);
-            return card;
+            if (Cards.TryGetValue(id, out var card))
+            {
+                return card;
+            }
+            Debug.LogError("TryGet Card" + id + "fail!");
+            return null;
         }
 
         public SpecialCard SpecialCard(string id)
         {
-            SpecialCard card;
-            SpecialCards.TryGetValue(id, out card);
-            return card;
+            if (SpecialCards.TryGetValue(id, out var card))
+            {
+                return card;
+            }
+            Debug.LogError("TryGet SpecialCard" + id + "fail!");
+            return null;
         }
 
-        public void ResolvePrerequisites()
+        public void FillDrawableCard()
         {
             foreach (Card card in Cards.Values)
             {
-                card.ResolvePrerequisites(this);
-                if (card.PrerequisitesSatisfied())
+                //if (card.PrerequisitesSatisfied())
                 {
                     AddDrawableCard(card);
                 }

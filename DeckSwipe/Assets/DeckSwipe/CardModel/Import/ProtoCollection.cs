@@ -4,7 +4,6 @@ namespace DeckSwipe.CardModel.Import
 {
     public class ProtoCollection
     {
-
         public readonly List<ProtoCard> cards;
         public readonly List<ProtoSpecialCard> specialCards;
         public readonly List<ProtoCharacter> characters;

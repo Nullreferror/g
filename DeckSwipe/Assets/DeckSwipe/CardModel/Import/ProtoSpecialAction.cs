@@ -10,17 +10,5 @@ namespace DeckSwipe.CardModel.Import
         public string text;
         public List<Followup> followup;
         public List<SpecialFollowup> specialFollowup;
-
-        public ProtoSpecialAction() { }
-
-        public ProtoSpecialAction(
-                string text,
-                List<Followup> followup,
-                List<SpecialFollowup> specialFollowup)
-        {
-            this.text = text;
-            this.followup = followup;
-            this.specialFollowup = specialFollowup;
-        }
     }
 }

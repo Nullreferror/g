@@ -8,17 +8,5 @@ namespace DeckSwipe.CardModel.Import
         public int id;
         public string name;
         public int imageId;
-
-        public ProtoCharacter() { }
-
-        public ProtoCharacter(
-                int id,
-                string name,
-                int imageId)
-        {
-            this.id = id;
-            this.name = name;
-            this.imageId = imageId;
-        }
     }
 }

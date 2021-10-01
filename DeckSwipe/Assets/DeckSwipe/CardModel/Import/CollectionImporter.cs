@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading.Tasks;
 using DeckSwipe.CardModel.DrawQueue;
 using DeckSwipe.CardModel.Import.Resource;
-using DeckSwipe.CardModel.Prerequisite;
 using DeckSwipe.Gamestate;
 using Outfrost;
 using UnityEngine;
@@ -191,63 +190,13 @@ namespace DeckSwipe.CardModel.Import
                 ActionOutcome leftActionOutcome = new ActionOutcome(leftAction.statsModification, leftActionFollowup);
                 ActionOutcome rightActionOutcome = new ActionOutcome(rightAction.statsModification, rightActionFollowup);
 
-                List<ICardPrerequisite> prerequisites = new List<ICardPrerequisite>();
-
-                bool failed = false;
-                foreach (ProtoCardPrerequisite prereq in protoCard.cardPrerequisites)
-                {
-                    CardPrerequisite cardPrerequisite = new CardPrerequisite(prereq.id);
-                    try
-                    {
-                        foreach (string s in prereq.status)
-                        {
-                            cardPrerequisite.Status |= CardStatusFor(s);
-                        }
-                    }
-                    catch (ArgumentException e)
-                    {
-                        Debug.LogWarning("[CollectionImporter] Card (id: " + protoCard.id + "): " + e.Message);
-                        failed = true;
-                        break;
-                    }
-                    prerequisites.Add(cardPrerequisite);
-                }
-                if (failed)
-                {
-                    continue;
-                }
-
-                foreach (ProtoSpecialCardPrerequisite prereq in protoCard.specialCardPrerequisites)
-                {
-                    SpecialCardPrerequisite cardPrerequisite = new SpecialCardPrerequisite(prereq.id);
-                    try
-                    {
-                        foreach (string s in prereq.status)
-                        {
-                            cardPrerequisite.Status |= CardStatusFor(s);
-                        }
-                    }
-                    catch (ArgumentException e)
-                    {
-                        Debug.LogWarning("[CollectionImporter] Card (id: " + protoCard.id + "): " + e.Message);
-                        failed = true;
-                        break;
-                    }
-                    prerequisites.Add(cardPrerequisite);
-                }
-                if (failed)
-                {
-                    continue;
-                }
-
                 Card card = new Card(
                         protoCard.cardText,
                         leftAction.text,
                         rightAction.text,
                         null,
                         leftActionOutcome,
-                        rightActionOutcome,
-                        prerequisites);
+                        rightActionOutcome);
 
                 characters.TryGetValue(protoCard.characterId, out card.character);
 
@@ -341,10 +290,7 @@ namespace DeckSwipe.CardModel.Import
                 IActionOutcome leftActionOutcome = null;
                 IActionOutcome rightActionOutcome = null;
 
-                if (protoSpecialCard.id == "gameover_coal"
-                        || protoSpecialCard.id == "gameover_food"
-                        || protoSpecialCard.id == "gameover_health"
-                        || protoSpecialCard.id == "gameover_hope")
+                if (protoSpecialCard.id.ToLower().Contains("gameover"))
                 {
                     leftActionOutcome = new GameOverOutcome();
                     rightActionOutcome = new GameOverOutcome();

@@ -46,8 +46,7 @@ namespace DeckSwipe.Gamestate
             {
                 if (entry.Value.progress == null)
                 {
-                    CardProgress progress = new CardProgress(
-                            entry.Key, CardStatus.None);
+                    CardProgress progress = new CardProgress(entry.Key, CardStatus.None);
                     cardProgress.Add(progress);
                     entry.Value.progress = progress;
                 }
@@ -56,8 +55,7 @@ namespace DeckSwipe.Gamestate
             {
                 if (entry.Value.progress == null)
                 {
-                    SpecialCardProgress progress = new SpecialCardProgress(
-                            entry.Key, CardStatus.None);
+                    SpecialCardProgress progress = new SpecialCardProgress(entry.Key, CardStatus.None);
                     specialCardProgress.Add(progress);
                     entry.Value.progress = progress;
                 }

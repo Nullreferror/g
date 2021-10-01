@@ -10,7 +10,7 @@ namespace DeckSwipe.CardModel.DrawQueue
         {
             if (queue.Count > 0)
             {
-                if (--queue[0].Delay == 0)
+                if (--queue[0].Delay <= 0)
                 {
                     IFollowup followup = queue[0];
                     queue.RemoveAt(0);

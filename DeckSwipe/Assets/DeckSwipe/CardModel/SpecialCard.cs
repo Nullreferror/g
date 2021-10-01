@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DeckSwipe.CardModel.Prerequisite;
 using DeckSwipe.Gamestate;
 using UnityEngine;
 
@@ -53,29 +52,17 @@ namespace DeckSwipe.CardModel
         public void CardShown(Game controller)
         {
             progress.Status |= CardStatus.CardShown;
-            foreach (Card card in dependentCards)
-            {
-                card.CheckPrerequisite(this, controller.CardStorage);
-            }
         }
 
         public void PerformLeftDecision(Game controller)
         {
             progress.Status |= CardStatus.LeftActionTaken;
-            foreach (Card card in dependentCards)
-            {
-                card.CheckPrerequisite(this, controller.CardStorage);
-            }
             leftSwipeOutcome.Perform(controller);
         }
 
         public void PerformRightDecision(Game controller)
         {
             progress.Status |= CardStatus.RightActionTaken;
-            foreach (Card card in dependentCards)
-            {
-                card.CheckPrerequisite(this, controller.CardStorage);
-            }
             rightSwipeOutcome.Perform(controller);
         }
 
