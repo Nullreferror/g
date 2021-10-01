@@ -7,11 +7,13 @@ namespace DeckSwipe.CardModel
     [Serializable]
     public class StatsModification
     {
-        public List<int> modifications;
+        public List<int> modifications { get; }
+        public int money { get; }
 
-        public StatsModification(List<int> modifications)
+        public StatsModification(List<int> modifications, int money)
         {
             this.modifications = modifications;
+            this.money = money;
         }
 
         public void Perform()

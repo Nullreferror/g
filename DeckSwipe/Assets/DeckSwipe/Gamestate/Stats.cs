@@ -11,15 +11,19 @@ namespace DeckSwipe.Gamestate
         public const int Count = 10;
 
         private const int _maxStatValue = 32;
-        private const int _startingValue = 16;
+        private const int _startingStatValue = 16;
+        private const int _startingMoneyValue = 100;
 
         private static readonly List<StatsDisplay> _changeListeners = new List<StatsDisplay>();
 
         private static readonly int[] stats = new int[Count];
+        private static int money;
 
         public static int GetStat(int i) => stats.ElementAtOrDefault(i);
 
         public static float GetPercentage(int i) => (float)stats.ElementAtOrDefault(i) / _maxStatValue;
+
+        public static int GetMoney() => money;
 
         public static void ApplyModification(StatsModification mod)
         {
@@ -27,6 +31,8 @@ namespace DeckSwipe.Gamestate
             {
                 stats[i] = ClampValue(stats[i] + mod.modifications.ElementAtOrDefault(i));
             }
+            money += mod.money;
+
             TriggerAllListeners();
         }
 
@@ -40,8 +46,9 @@ namespace DeckSwipe.Gamestate
         {
             for (int i = 0; i < Count; ++i)
             {
-                stats[i] = ClampValue(_startingValue);
+                stats[i] = ClampValue(_startingStatValue);
             }
+            money = _startingMoneyValue;
         }
 
         private static void TriggerAllListeners()
