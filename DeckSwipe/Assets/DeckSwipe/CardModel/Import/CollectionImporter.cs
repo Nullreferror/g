@@ -194,6 +194,8 @@ namespace DeckSwipe.CardModel.Import
                         protoCard.cardText,
                         leftAction.text,
                         rightAction.text,
+                        protoCard.onlyFollowup,
+                        protoCard.count,
                         null,
                         leftActionOutcome,
                         rightActionOutcome);

@@ -9,6 +9,8 @@ namespace DeckSwipe.CardModel
         public string CardText { get; }
         public string LeftSwipeText { get; }
         public string RightSwipeText { get; }
+        public bool OnlyFollowup { get; }
+        public int Count { get; set; }
 
         public string CharacterName
         {
@@ -35,6 +37,8 @@ namespace DeckSwipe.CardModel
                 string cardText,
                 string leftSwipeText,
                 string rightSwipeText,
+                bool onlyFollowup,
+                int count,
                 Character character,
                 ActionOutcome leftOutcome,
                 ActionOutcome rightOutcome)
@@ -42,6 +46,8 @@ namespace DeckSwipe.CardModel
             this.CardText = cardText;
             this.LeftSwipeText = leftSwipeText;
             this.RightSwipeText = rightSwipeText;
+            this.OnlyFollowup = onlyFollowup;
+            this.Count = count;
             this.character = character;
             leftSwipeOutcome = leftOutcome;
             rightSwipeOutcome = rightOutcome;

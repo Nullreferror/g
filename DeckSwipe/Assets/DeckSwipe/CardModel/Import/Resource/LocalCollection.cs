@@ -17,10 +17,10 @@ namespace DeckSwipe.CardModel.Import.Resource
 
         public static ProtoCollection Fetch()
         {
-            List<ProtoCard> cards = JsonResources.Load<ProtoCard>(_cardsPath);
-            List<ProtoSpecialCard> specialCards = JsonResources.Load<ProtoSpecialCard>(_specialCardsPath);
-            List<ProtoCharacter> characters = JsonResources.Load<ProtoCharacter>(_charactersPath);
-            List<ProtoImage> images = JsonResources.Load<ProtoImage>(_imagesPath);
+            var cards = JsonResources.Load<ProtoCard>(_cardsPath);
+            var specialCards = JsonResources.Load<ProtoSpecialCard>(_specialCardsPath);
+            var characters = JsonResources.Load<ProtoCharacter>(_charactersPath);
+            var images = JsonResources.Load<ProtoImage>(_imagesPath);
 
             Debug.Log("[LocalCollection] Loaded " + cards.Count + " cards");
             Debug.Log("[LocalCollection] Loaded " + specialCards.Count + " special cards");

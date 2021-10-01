@@ -27,7 +27,17 @@ namespace DeckSwipe.Gamestate
 
         public Card Random()
         {
-            return drawableCards[UnityEngine.Random.Range(0, drawableCards.Count)];
+            if (drawableCards.Count <= 0)
+            {
+                return null;
+            }
+
+            var card = drawableCards[UnityEngine.Random.Range(0, drawableCards.Count)];
+            if (--card.Count <= 0)
+            {
+                drawableCards.Remove(card);
+            }
+            return card;
         }
 
         public Card ForId(int id)
@@ -36,7 +46,7 @@ namespace DeckSwipe.Gamestate
             {
                 return card;
             }
-            Debug.LogError("TryGet Card" + id + "fail!");
+            Debug.LogError($"TryGet Card {id} fail!");
             return null;
         }
 
@@ -46,7 +56,7 @@ namespace DeckSwipe.Gamestate
             {
                 return card;
             }
-            Debug.LogError("TryGet SpecialCard" + id + "fail!");
+            Debug.LogError($"TryGet SpecialCard {id} fail!");
             return null;
         }
 
@@ -54,7 +64,8 @@ namespace DeckSwipe.Gamestate
         {
             foreach (Card card in Cards.Values)
             {
-                //if (card.PrerequisitesSatisfied())
+                bool regular = (card.OnlyFollowup == false);
+                if (regular)
                 {
                     AddDrawableCard(card);
                 }

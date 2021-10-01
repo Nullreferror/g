@@ -99,7 +99,15 @@ namespace DeckSwipe
             {
                 IFollowup followup = cardDrawQueue.Next();
                 ICard card = followup?.Fetch(cardStorage) ?? cardStorage.Random();
-                SpawnCard(card);
+                if (card != null)
+                {
+                    SpawnCard(card);
+                }
+                else
+                {
+                    // TODO: win or lose
+                    SpawnCard(cardStorage.SpecialCard("gameover"));
+                }
             }
             saveIntervalCounter = (saveIntervalCounter - 1) % _saveInterval;
             if (saveIntervalCounter == 0)
