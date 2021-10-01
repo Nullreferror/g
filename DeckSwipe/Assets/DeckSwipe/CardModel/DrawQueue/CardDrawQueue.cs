@@ -1,45 +1,51 @@
 using System.Collections.Generic;
 
-namespace DeckSwipe.CardModel.DrawQueue {
+namespace DeckSwipe.CardModel.DrawQueue
+{
+    public class CardDrawQueue
+    {
+        private readonly List<IFollowup> queue = new List<IFollowup>();
 
-	public class CardDrawQueue {
+        public IFollowup Next()
+        {
+            if (queue.Count > 0)
+            {
+                if (--queue[0].Delay == 0)
+                {
+                    IFollowup followup = queue[0];
+                    queue.RemoveAt(0);
+                    return followup;
+                }
+            }
+            return null;
+        }
 
-		private readonly List<IFollowup> queue = new List<IFollowup>();
+        public void Insert(IFollowup followup)
+        {
+            int i = 0;
+            int delayBefore = 0;
+            while (i < queue.Count && (delayBefore < followup.Delay || queue[i].Delay == 1))
+            {
+                delayBefore += queue[i].Delay;
+                i++;
+            }
+            queue.Insert(i, followup.Clone());
 
-		public IFollowup Next() {
-			if (queue.Count > 0) {
-				if (--queue[0].Delay == 0) {
-					IFollowup followup = queue[0];
-					queue.RemoveAt(0);
-					return followup;
-				}
-			}
-			return null;
-		}
+            queue[i].Delay -= delayBefore;
+            if (queue[i].Delay < 1)
+            {
+                queue[i].Delay = 1;
+            }
 
-		public void Insert(IFollowup followup) {
-			int i = 0;
-			int delayBefore = 0;
-			while (i < queue.Count && (delayBefore < followup.Delay || queue[i].Delay == 1)) {
-				delayBefore += queue[i].Delay;
-				i++;
-			}
-			queue.Insert(i, followup.Clone());
+            if (i + 1 < queue.Count)
+            {
+                queue[i + 1].Delay -= queue[i].Delay;
+            }
+        }
 
-			queue[i].Delay -= delayBefore;
-			if (queue[i].Delay < 1) {
-				queue[i].Delay = 1;
-			}
-
-			if (i + 1 < queue.Count) {
-				queue[i + 1].Delay -= queue[i].Delay;
-			}
-		}
-
-		public void Clear() {
-			queue.Clear();
-		}
-
-	}
-
+        public void Clear()
+        {
+            queue.Clear();
+        }
+    }
 }

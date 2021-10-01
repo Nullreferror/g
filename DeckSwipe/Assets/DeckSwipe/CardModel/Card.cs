@@ -3,121 +3,139 @@ using DeckSwipe.CardModel.Prerequisite;
 using DeckSwipe.Gamestate;
 using UnityEngine;
 
-namespace DeckSwipe.CardModel {
+namespace DeckSwipe.CardModel
+{
+    public class Card : ICard
+    {
+        public string CardText { get; }
+        public string LeftSwipeText { get; }
+        public string RightSwipeText { get; }
 
-	public class Card : ICard {
+        public string CharacterName
+        {
+            get { return character != null ? character.name : ""; }
+        }
 
-		public string CardText { get; }
-		public string LeftSwipeText { get; }
-		public string RightSwipeText { get; }
+        public Sprite CardSprite
+        {
+            get { return character?.sprite; }
+        }
 
-		public string CharacterName {
-			get { return character != null ? character.name : ""; }
-		}
+        public ICardProgress Progress
+        {
+            get { return progress; }
+        }
 
-		public Sprite CardSprite {
-			get { return character?.sprite; }
-		}
+        public Character character;
+        public CardProgress progress;
 
-		public ICardProgress Progress {
-			get { return progress; }
-		}
+        private readonly List<ICardPrerequisite> prerequisites;
+        private readonly ActionOutcome leftSwipeOutcome;
+        private readonly ActionOutcome rightSwipeOutcome;
 
-		public Character character;
-		public CardProgress progress;
+        private Dictionary<ICard, ICardPrerequisite> unsatisfiedPrerequisites;
+        private List<Card> dependentCards = new List<Card>();
 
-		private readonly List<ICardPrerequisite> prerequisites;
-		private readonly ActionOutcome leftSwipeOutcome;
-		private readonly ActionOutcome rightSwipeOutcome;
+        public Card(
+                string cardText,
+                string leftSwipeText,
+                string rightSwipeText,
+                Character character,
+                ActionOutcome leftOutcome,
+                ActionOutcome rightOutcome,
+                List<ICardPrerequisite> prerequisites)
+        {
+            this.CardText = cardText;
+            this.LeftSwipeText = leftSwipeText;
+            this.RightSwipeText = rightSwipeText;
+            this.character = character;
+            leftSwipeOutcome = leftOutcome;
+            rightSwipeOutcome = rightOutcome;
+            this.prerequisites = prerequisites;
+        }
 
-		private Dictionary<ICard, ICardPrerequisite> unsatisfiedPrerequisites;
-		private List<Card> dependentCards = new List<Card>();
+        public void CardShown(Game controller)
+        {
+            progress.Status |= CardStatus.CardShown;
+            foreach (Card card in dependentCards)
+            {
+                card.CheckPrerequisite(this, controller.CardStorage);
+            }
+        }
 
-		public Card(
-				string cardText,
-				string leftSwipeText,
-				string rightSwipeText,
-				Character character,
-				ActionOutcome leftOutcome,
-				ActionOutcome rightOutcome,
-				List<ICardPrerequisite> prerequisites) {
-			this.CardText = cardText;
-			this.LeftSwipeText = leftSwipeText;
-			this.RightSwipeText = rightSwipeText;
-			this.character = character;
-			leftSwipeOutcome = leftOutcome;
-			rightSwipeOutcome = rightOutcome;
-			this.prerequisites = prerequisites;
-		}
+        public void PerformLeftDecision(Game controller)
+        {
+            progress.Status |= CardStatus.LeftActionTaken;
+            foreach (Card card in dependentCards)
+            {
+                card.CheckPrerequisite(this, controller.CardStorage);
+            }
+            leftSwipeOutcome.Perform(controller);
+        }
 
-		public void CardShown(Game controller) {
-			progress.Status |= CardStatus.CardShown;
-			foreach (Card card in dependentCards) {
-				card.CheckPrerequisite(this, controller.CardStorage);
-			}
-		}
+        public void PerformRightDecision(Game controller)
+        {
+            progress.Status |= CardStatus.RightActionTaken;
+            foreach (Card card in dependentCards)
+            {
+                card.CheckPrerequisite(this, controller.CardStorage);
+            }
+            rightSwipeOutcome.Perform(controller);
+        }
 
-		public void PerformLeftDecision(Game controller) {
-			progress.Status |= CardStatus.LeftActionTaken;
-			foreach (Card card in dependentCards) {
-				card.CheckPrerequisite(this, controller.CardStorage);
-			}
-			leftSwipeOutcome.Perform(controller);
-		}
+        public void CheckPrerequisite(ICard dependency, CardStorage cardStorage)
+        {
+            if (PrerequisitesSatisfied()
+                    || !unsatisfiedPrerequisites.ContainsKey(dependency))
+            {
+                dependency.RemoveDependentCard(this);
+                return;
+            }
 
-		public void PerformRightDecision(Game controller) {
-			progress.Status |= CardStatus.RightActionTaken;
-			foreach (Card card in dependentCards) {
-				card.CheckPrerequisite(this, controller.CardStorage);
-			}
-			rightSwipeOutcome.Perform(controller);
-		}
+            ICardPrerequisite prerequisite = unsatisfiedPrerequisites[dependency];
+            if ((dependency.Progress.Status & prerequisite?.Status) == prerequisite?.Status)
+            {
+                unsatisfiedPrerequisites.Remove(dependency);
+                dependency.RemoveDependentCard(this);
+            }
 
-		public void CheckPrerequisite(ICard dependency, CardStorage cardStorage) {
-			if (PrerequisitesSatisfied()
-					|| !unsatisfiedPrerequisites.ContainsKey(dependency)) {
-				dependency.RemoveDependentCard(this);
-				return;
-			}
+            if (PrerequisitesSatisfied())
+            {
+                // Duplicate-proof because we've verified that this card's
+                // prerequisites were not satisfied before
+                cardStorage.AddDrawableCard(this);
+            }
+        }
 
-			ICardPrerequisite prerequisite = unsatisfiedPrerequisites[dependency];
-			if ((dependency.Progress.Status & prerequisite?.Status) == prerequisite?.Status) {
-				unsatisfiedPrerequisites.Remove(dependency);
-				dependency.RemoveDependentCard(this);
-			}
+        public void ResolvePrerequisites(CardStorage cardStorage)
+        {
+            unsatisfiedPrerequisites = new Dictionary<ICard, ICardPrerequisite>();
+            foreach (ICardPrerequisite prerequisite in prerequisites)
+            {
+                ICard card = prerequisite.GetCard(cardStorage);
+                if (card != null
+                        && (card.Progress.Status & prerequisite.Status) != prerequisite.Status
+                        && !unsatisfiedPrerequisites.ContainsKey(card))
+                {
+                    unsatisfiedPrerequisites.Add(card, prerequisite);
+                    card.AddDependentCard(this);
+                }
+            }
+        }
 
-			if (PrerequisitesSatisfied()) {
-				// Duplicate-proof because we've verified that this card's
-				// prerequisites were not satisfied before
-				cardStorage.AddDrawableCard(this);
-			}
-		}
+        public void AddDependentCard(Card card)
+        {
+            dependentCards.Add(card);
+        }
 
-		public void ResolvePrerequisites(CardStorage cardStorage) {
-			unsatisfiedPrerequisites = new Dictionary<ICard, ICardPrerequisite>();
-			foreach (ICardPrerequisite prerequisite in prerequisites) {
-				ICard card = prerequisite.GetCard(cardStorage);
-				if (card != null
-						&& (card.Progress.Status & prerequisite.Status) != prerequisite.Status
-						&& !unsatisfiedPrerequisites.ContainsKey(card)) {
-					unsatisfiedPrerequisites.Add(card, prerequisite);
-					card.AddDependentCard(this);
-				}
-			}
-		}
+        public void RemoveDependentCard(Card card)
+        {
+            dependentCards.Remove(card);
+        }
 
-		public void AddDependentCard(Card card) {
-			dependentCards.Add(card);
-		}
-
-		public void RemoveDependentCard(Card card) {
-			dependentCards.Remove(card);
-		}
-
-		public bool PrerequisitesSatisfied() {
-			return unsatisfiedPrerequisites.Count == 0;
-		}
-
-	}
-
+        public bool PrerequisitesSatisfied()
+        {
+            return unsatisfiedPrerequisites.Count == 0;
+        }
+    }
 }

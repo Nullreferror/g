@@ -1,32 +1,34 @@
 using System;
 using DeckSwipe.Gamestate;
 
-namespace DeckSwipe.CardModel.DrawQueue {
+namespace DeckSwipe.CardModel.DrawQueue
+{
+    [Serializable]
+    public class SpecialFollowup : IFollowup
+    {
+        public string id;
+        public int delay;
 
-	[Serializable]
-	public class SpecialFollowup : IFollowup {
+        public int Delay
+        {
+            get { return delay; }
+            set { delay = value; }
+        }
 
-		public string id;
-		public int delay;
+        public SpecialFollowup(string id, int delay)
+        {
+            this.id = id;
+            this.delay = delay;
+        }
 
-		public int Delay {
-			get { return delay; }
-			set { delay = value; }
-		}
+        public IFollowup Clone()
+        {
+            return new SpecialFollowup(id, delay);
+        }
 
-		public SpecialFollowup(string id, int delay) {
-			this.id = id;
-			this.delay = delay;
-		}
-
-		public IFollowup Clone() {
-			return new SpecialFollowup(id, delay);
-		}
-
-		public ICard Fetch(CardStorage cardStorage) {
-			return cardStorage.SpecialCard(id);
-		}
-
-	}
-
+        public ICard Fetch(CardStorage cardStorage)
+        {
+            return cardStorage.SpecialCard(id);
+        }
+    }
 }
