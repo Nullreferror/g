@@ -4,26 +4,16 @@
     "cardText": "An automaton got stuck in a hothouse. What do we do with it?",
     "leftAction": {
         "text": "Disable the automaton",
-        "statsModification": {
-            "coal": -2,
-            "food": -2,
-            "health": 0,
-            "hope": -2
-        },
+        "statsModification": [ -2, 2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Disable the hothouse",
-        "statsModification": {
-            "coal": 2,
-            "food": -4,
-            "health": -2,
-            "hope": -2
-        },
+        "statsModification": [ 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },
-    "cardPrerequisites": [],
-    "specialCardPrerequisites": []
+    "onlyFollowup": false,
+    "count": 1
 }

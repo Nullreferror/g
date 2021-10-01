@@ -4,23 +4,13 @@
     "cardText": "The scouts come across what looks to be a wrecked ship. Should they explore it?",
     "leftAction": {
         "text": "No",
-        "statsModification": {
-            "coal": 0,
-            "food": 0,
-            "health": 0,
-            "hope": 0
-        },
+        "statsModification": [ -2, 2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Yes",
-        "statsModification": {
-            "coal": 0,
-            "food": 0,
-            "health": 0,
-            "hope": 0
-        },
+        "statsModification": [ 2, 2, 2, 2 ],
         "followup": [
             {
                 "id": 4,
@@ -29,6 +19,6 @@
         ],
         "specialFollowup": []
     },
-    "cardPrerequisites": [],
-    "specialCardPrerequisites": []
+    "onlyFollowup": false,
+    "count": 1
 }

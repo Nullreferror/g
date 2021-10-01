@@ -4,26 +4,16 @@
     "cardText": "Sample card 1",
     "leftAction": {
         "text": "Sample action 1L",
-        "statsModification": {
-            "coal": 4,
-            "food": -2,
-            "health": -4,
-            "hope": 0
-        },
+        "statsModification": [ -2, 2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Sample action 1R",
-        "statsModification": {
-            "coal": -2,
-            "food": 2,
-            "health": 4,
-            "hope": 0
-        },
+        "statsModification": [ 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },
-    "cardPrerequisites": [],
-    "specialCardPrerequisites": []
+    "onlyFollowup": false,
+    "count": 1
 }

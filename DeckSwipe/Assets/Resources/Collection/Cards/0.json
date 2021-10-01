@@ -4,26 +4,21 @@
     "cardText": "This is a test card text that should appear on screen.",
     "leftAction": {
         "text": "Here goes",
-        "statsModification": {
-            "coal": -4,
-            "food": 4,
-            "health": -2,
-            "hope": 2
-        },
+        "statsModification": [ -4, 4, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "There goes",
-        "statsModification": {
-            "coal": 2,
-            "food": 0,
-            "health": -6,
-            "hope": -2
-        },
-        "followup": [],
+        "statsModification": [ 2, 0, -6, -2 ],
+        "followup": [
+            {
+                "id": 1,
+                "delay": 1
+            }
+        ],
         "specialFollowup": []
     },
-    "cardPrerequisites": [],
-    "specialCardPrerequisites": []
+    "onlyFollowup": false,
+    "count": 1
 }
