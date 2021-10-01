@@ -110,10 +110,8 @@ namespace DeckSwipe
 
         public void CardActionPerformed()
         {
-            progressStorage.Progress.AddDays(Random.Range(0.5f, 1.5f),
-                    daysPassedPreviously);
-            ProgressDisplay.SetDaysSurvived(
-                    (int)(progressStorage.Progress.daysPassed - daysPassedPreviously));
+            progressStorage.Progress.AddDays(Random.Range(0.5f, 1.5f), daysPassedPreviously);
+            ProgressDisplay.SetDaysSurvived((int)(progressStorage.Progress.daysPassed - daysPassedPreviously));
             DrawNextCard();
         }
 
@@ -130,8 +128,7 @@ namespace DeckSwipe
 
         private void SpawnCard(ICard card)
         {
-            CardBehaviour cardInstance = Instantiate(cardPrefab, spawnPosition,
-                    Quaternion.Euler(0.0f, -180.0f, 0.0f));
+            CardBehaviour cardInstance = Instantiate(cardPrefab, spawnPosition, Quaternion.Euler(0.0f, -180.0f, 0.0f));
             cardInstance.Card = card;
             cardInstance.snapPosition.y = spawnPosition.y;
             cardInstance.Controller = this;

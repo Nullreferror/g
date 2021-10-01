@@ -11,8 +11,6 @@ namespace DeckSwipe.Gamestate
 {
     public class CardStorage
     {
-        private static readonly Character _defaultGameOverCharacter = new Character("", null);
-
         private readonly Sprite defaultSprite;
 
         public Dictionary<int, Card> Cards { get; private set; }
@@ -66,79 +64,9 @@ namespace DeckSwipe.Gamestate
 
         private async Task PopulateCollection()
         {
-            ImportedCards importedCards =
-                    await new CollectionImporter(defaultSprite).Import();
+            ImportedCards importedCards = await new CollectionImporter(defaultSprite).Import();
             Cards = importedCards.cards;
             SpecialCards = importedCards.specialCards;
-            if (Cards == null || Cards.Count == 0)
-            {
-                PopulateFallback();
-            }
-            VerifySpecialCards();
-        }
-
-        private void PopulateFallback()
-        {
-            Cards = new Dictionary<int, Card>();
-            Character placeholderPerson = new Character("Placeholder Person", defaultSprite);
-            Cards.Add(0, new Card("Placeholder card 1",
-                    "A",
-                    "B",
-                    placeholderPerson,
-                    new ActionOutcome(-2, 4, -2, 2),
-                    new ActionOutcome(2, 0, 2, -2),
-                    new List<ICardPrerequisite>()));
-            Cards.Add(1, new Card("Placeholder card 2",
-                    "A",
-                    "B",
-                    placeholderPerson,
-                    new ActionOutcome(-1, -1, -1, -1),
-                    new ActionOutcome(2, 2, 2, 2),
-                    new List<ICardPrerequisite>()));
-            Cards.Add(2, new Card("Placeholder card 3",
-                    "A",
-                    "B",
-                    placeholderPerson,
-                    new ActionOutcome(1, 1, 0, -2),
-                    new ActionOutcome(2, 2, -2, -4),
-                    new List<ICardPrerequisite>()));
-        }
-
-        private void VerifySpecialCards()
-        {
-            if (SpecialCards == null)
-            {
-                SpecialCards = new Dictionary<string, SpecialCard>();
-            }
-
-            if (!SpecialCards.ContainsKey("gameover_coal"))
-            {
-                SpecialCards.Add("gameover_coal", new SpecialCard("The city runs out of coal to run the generator, and freezes over.", "", "",
-                        _defaultGameOverCharacter,
-                        new GameOverOutcome(),
-                        new GameOverOutcome()));
-            }
-            if (!SpecialCards.ContainsKey("gameover_food"))
-            {
-                SpecialCards.Add("gameover_food", new SpecialCard("Hunger consumes the city, as food reserves deplete.", "", "",
-                        _defaultGameOverCharacter,
-                        new GameOverOutcome(),
-                        new GameOverOutcome()));
-            }
-            if (!SpecialCards.ContainsKey("gameover_health"))
-            {
-                SpecialCards.Add("gameover_health", new SpecialCard("The city's population succumbs to wounds and spreading diseases.", "", "",
-                        _defaultGameOverCharacter,
-                        new GameOverOutcome(),
-                        new GameOverOutcome()));
-            }
-            if (!SpecialCards.ContainsKey("gameover_hope"))
-            {
-                SpecialCards.Add("gameover_hope", new SpecialCard("All hope among the people is lost.", "", "",
-                        _defaultGameOverCharacter,
-                        new GameOverOutcome(),
-                        new GameOverOutcome()));
-            }
         }
     }
 }

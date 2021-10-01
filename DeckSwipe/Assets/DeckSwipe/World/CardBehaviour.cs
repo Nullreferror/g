@@ -13,7 +13,6 @@ namespace DeckSwipe.World
             Converging,
             FlyingAway,
             Revealing
-
         }
 
         private const float _animationDuration = 0.4f;

@@ -85,8 +85,7 @@ namespace DeckSwipe.CardModel
 
         public void CheckPrerequisite(ICard dependency, CardStorage cardStorage)
         {
-            if (PrerequisitesSatisfied()
-                    || !unsatisfiedPrerequisites.ContainsKey(dependency))
+            if (PrerequisitesSatisfied() || !unsatisfiedPrerequisites.ContainsKey(dependency))
             {
                 dependency.RemoveDependentCard(this);
                 return;
