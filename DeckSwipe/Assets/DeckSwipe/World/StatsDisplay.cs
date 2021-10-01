@@ -1,5 +1,6 @@
 using DeckSwipe.Gamestate;
 using Outfrost;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +8,7 @@ namespace DeckSwipe.World
 {
     public class StatsDisplay : MonoBehaviour
     {
-        public Image coalBar;
-        public Image foodBar;
-        public Image healthBar;
-        public Image hopeBar;
+        public List<Image> bars;
         public float relativeMargin;
 
         private float minFillAmount;
@@ -30,10 +28,10 @@ namespace DeckSwipe.World
 
         public void TriggerUpdate()
         {
-            coalBar.fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.CoalPercentage);
-            foodBar.fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.FoodPercentage);
-            healthBar.fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.HealthPercentage);
-            hopeBar.fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.HopePercentage);
+            for (int i = 0; i < bars.Count; ++i)
+            {
+                bars[i].fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.GetPercentage(i));
+            }
         }
     }
 }

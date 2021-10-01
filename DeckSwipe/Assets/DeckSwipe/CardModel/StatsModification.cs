@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DeckSwipe.Gamestate;
 
 namespace DeckSwipe.CardModel
@@ -6,22 +7,16 @@ namespace DeckSwipe.CardModel
     [Serializable]
     public class StatsModification
     {
-        public int coal;
-        public int food;
-        public int health;
-        public int hope;
+        public List<int> modifications;
 
-        public StatsModification(int coal, int food, int health, int hope)
+        public StatsModification(List<int> modifications)
         {
-            this.coal = coal;
-            this.food = food;
-            this.health = health;
-            this.hope = hope;
+            this.modifications = modifications;
         }
 
         public void Perform()
         {
-            // TODO Pass through status effects
+            // TODO: Pass through status effects
             Stats.ApplyModification(this);
         }
     }

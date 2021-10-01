@@ -187,8 +187,8 @@ namespace DeckSwipe.CardModel.Import
                     rightActionFollowup = rightAction.specialFollowup[0];
                 }
 
-                ActionOutcome leftActionOutcome = new ActionOutcome(leftAction.statsModification, leftActionFollowup);
-                ActionOutcome rightActionOutcome = new ActionOutcome(rightAction.statsModification, rightActionFollowup);
+                ActionOutcome leftActionOutcome = new ActionOutcome(new StatsModification(leftAction.statsModification), leftActionFollowup);
+                ActionOutcome rightActionOutcome = new ActionOutcome(new StatsModification(rightAction.statsModification), rightActionFollowup);
 
                 Card card = new Card(
                         protoCard.cardText,

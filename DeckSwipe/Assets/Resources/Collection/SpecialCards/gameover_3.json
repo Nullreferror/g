@@ -1,7 +1,7 @@
 {
-    "id": "gameover_heat",
+    "id": "gameover_3",
     "characterId": -1,
-    "cardText": "The city runs out of heat and freezes over.",
+    "cardText": "The city runs out of materials to sustain itself.",
     "leftAction": {
         "text": "",
         "followup": [],

@@ -8,7 +8,7 @@ namespace DeckSwipe.CardModel.Import
     public class ProtoAction
     {
         public string text;
-        public StatsModification statsModification;
+        public List<int> statsModification;
         public List<Followup> followup;
         public List<SpecialFollowup> specialFollowup;
     }

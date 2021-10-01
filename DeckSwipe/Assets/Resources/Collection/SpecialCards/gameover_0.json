@@ -1,7 +1,7 @@
 {
-    "id": "gameover_materials",
+    "id": "gameover_0",
     "characterId": -1,
-    "cardText": "The city runs out of materials to sustain itself.",
+    "cardText": "Hunger consumes the city, as food reserves deplete.",
     "leftAction": {
         "text": "",
         "followup": [],

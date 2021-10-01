@@ -79,36 +79,27 @@ namespace DeckSwipe
 
         public void DrawNextCard()
         {
-            if (Stats.Coal == 0)
+            for (int i = 0; i < Stats.Count; ++i)
             {
-                SpawnCard(cardStorage.SpecialCard("gameover_coal"));
+                if (Stats.GetStat(i) == 0)
+                {
+                    SpawnCard(cardStorage.SpecialCard($"gameover_{0}"));
+                    return;
+                }
             }
-            else if (Stats.Food == 0)
+
+            IFollowup followup = cardDrawQueue.Next();
+            ICard card = followup?.Fetch(cardStorage) ?? cardStorage.Random();
+            if (card != null)
             {
-                SpawnCard(cardStorage.SpecialCard("gameover_food"));
-            }
-            else if (Stats.Health == 0)
-            {
-                SpawnCard(cardStorage.SpecialCard("gameover_health"));
-            }
-            else if (Stats.Hope == 0)
-            {
-                SpawnCard(cardStorage.SpecialCard("gameover_hope"));
+                SpawnCard(card);
             }
             else
             {
-                IFollowup followup = cardDrawQueue.Next();
-                ICard card = followup?.Fetch(cardStorage) ?? cardStorage.Random();
-                if (card != null)
-                {
-                    SpawnCard(card);
-                }
-                else
-                {
-                    // TODO: win or lose
-                    SpawnCard(cardStorage.SpecialCard("gameover"));
-                }
+                // TODO: win or lose
+                SpawnCard(cardStorage.SpecialCard("gameover"));
             }
+
             saveIntervalCounter = (saveIntervalCounter - 1) % _saveInterval;
             if (saveIntervalCounter == 0)
             {
