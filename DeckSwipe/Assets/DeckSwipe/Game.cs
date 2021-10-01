@@ -16,7 +16,6 @@ namespace DeckSwipe {
 		public CardBehaviour cardPrefab;
 		public Vector3 spawnPosition;
 		public Sprite defaultCharacterSprite;
-		public bool loadRemoteCollectionFirst;
 
 		public CardStorage CardStorage {
 			get { return cardStorage; }
@@ -44,7 +43,7 @@ namespace DeckSwipe {
 					keyCode => Application.Quit());
 			#endif
 
-			cardStorage = new CardStorage(defaultCharacterSprite, loadRemoteCollectionFirst);
+			cardStorage = new CardStorage(defaultCharacterSprite);
 			progressStorage = new ProgressStorage(cardStorage);
 
 			GameStartOverlay.FadeOutCallback = StartGameplayLoop;

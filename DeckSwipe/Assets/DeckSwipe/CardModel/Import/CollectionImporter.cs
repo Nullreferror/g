@@ -17,38 +17,14 @@ namespace DeckSwipe.CardModel.Import {
 		private readonly Sprite defaultSprite;
 		private readonly bool remoteCollectionFirst;
 
-		public CollectionImporter(Sprite defaultSprite, bool remoteCollectionFirst) {
+		public CollectionImporter(Sprite defaultSprite) {
 			this.defaultSprite = defaultSprite;
-			this.remoteCollectionFirst = remoteCollectionFirst;
 		}
 
 		public async Task<ImportedCards> Import() {
-			ProtoCollection collection;
-			if (remoteCollectionFirst) {
-				try {
-					collection = await new GoogleSheetsCollection().Fetch();
-				}
-				catch (Exception e) when (e is WebException || e is FormatException) {
-					Debug.LogError("[CollectionImporter] Import from Google Sheets failed: " + e.Message);
-					Debug.LogWarning("[CollectionImporter] Trying local collection...");
-					collection = LocalCollection.Fetch();
-					if (collection.cards.Count == 0) {
-						Debug.LogWarning("[CollectionImporter] Import from local collection returned 0 cards");
-					}
-				}
-			}
-			else {
-				collection = LocalCollection.Fetch();
-				if (collection.cards.Count == 0) {
-					Debug.LogWarning("[CollectionImporter] Import from local collection returned 0 cards, "
-							+ "trying Google Sheets...");
-					try {
-						collection = await new GoogleSheetsCollection().Fetch();
-					}
-					catch (Exception e) when (e is WebException || e is FormatException) {
-						Debug.LogError("[CollectionImporter] Import from Google Sheets failed: " + e.Message);
-					}
-				}
+			ProtoCollection collection = LocalCollection.Fetch();
+			if (collection.cards.Count == 0) {
+				Debug.LogError("[CollectionImporter] Import from local collection returned 0 cards");
 			}
 
 			Dictionary<int, Sprite> sprites = new Dictionary<int, Sprite>();
