@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DeckSwipe.CardModel;
 using DeckSwipe.World;
@@ -22,9 +23,21 @@ namespace DeckSwipe.Gamestate
 
         public static int GetStat(int i) => stats.ElementAtOrDefault(i);
 
-        public static float GetPercentage(int i) => (float)stats.ElementAtOrDefault(i) / MaxStatValue;
+        public static float GetStatPercentage(int i) => (float)stats.ElementAtOrDefault(i) / MaxStatValue;
 
         public static int GetMoney() => money;
+
+        public static float GetMoneyPercentage()
+        {
+            if (money >= 0)
+            {
+                return (float)money / MaxMoneyValue;
+            }
+            else
+            {
+                return 1.0f - (float)Math.Abs(money) / MaxMoneyValue;
+            }
+        }
 
         public static void ApplyModification(StatsModification mod)
         {

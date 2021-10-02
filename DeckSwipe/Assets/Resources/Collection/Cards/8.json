@@ -4,12 +4,14 @@
     "cardText": "Sample card 1",
     "leftAction": {
         "text": "Sample action 1L",
+        "money": 10,
         "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Sample action 1R",
+        "money": -10,
         "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []

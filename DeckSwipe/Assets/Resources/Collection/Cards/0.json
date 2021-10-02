@@ -4,6 +4,7 @@
     "cardText": "This is startd card 1.",
     "leftAction": {
         "text": "Here goes",
+        "money": 10,
         "statsModification": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
         "followup": [
             {
@@ -15,6 +16,7 @@
     },
     "rightAction": {
         "text": "There goes",
+        "money": -10,
         "statsModification": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
         "followup": [
             {

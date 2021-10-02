@@ -4,12 +4,14 @@
     "cardText": "An automaton got stuck in a hothouse. What do we do with it?",
     "leftAction": {
         "text": "Disable the automaton",
+        "money": 10,
         "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Disable the hothouse",
+        "money": -10,
         "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []

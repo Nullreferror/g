@@ -4,12 +4,14 @@
     "cardText": "Don't you think we should have a tea party after work hours?",
     "leftAction": {
         "text": "That's a great idea",
+        "money": 10,
         "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "No, let's not",
+        "money": -10,
         "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []

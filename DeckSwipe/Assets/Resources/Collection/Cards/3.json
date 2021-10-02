@@ -4,12 +4,14 @@
     "cardText": "The scouts come across what looks to be a wrecked ship. Should they explore it?",
     "leftAction": {
         "text": "No",
+        "money": 10,
         "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Yes",
+        "money": -10,
         "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [
             {

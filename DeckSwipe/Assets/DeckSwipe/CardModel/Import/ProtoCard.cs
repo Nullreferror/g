@@ -10,8 +10,8 @@ namespace DeckSwipe.CardModel.Import
         public int id;
         public int characterId;
         public string cardText;
-        public bool onlyFollowup = false;
-        public int count = 1;
+        public bool onlyFollowup;
+        public int count;
         public ProtoAction leftAction;
         public ProtoAction rightAction;
     }
