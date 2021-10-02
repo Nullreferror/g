@@ -36,61 +36,17 @@ namespace DeckSwipe.CardModel.Import
                     Debug.LogWarning($"[CollectionImporter] Duplicate {image.id} found in Images");
                     continue;
                 }
-                if (image.url == null)
+                if (image.texture == null)
                 {
-                    Debug.LogWarning($"[CollectionImporter] Image (id:{image.id}) has a null URL");
+                    Debug.LogWarning($"[CollectionImporter] Image (id:{image.id}) has a null Texture");
                     continue;
                 }
 
-                Debug.Log("[CollectionImporter] Fetching image from " + image.url + " ...");
-                HttpWebResponse imageResponse;
-                try
-                {
-                    HttpWebRequest imageRequest = WebRequest.CreateHttp(image.url);
-                    imageResponse = (HttpWebResponse)await imageRequest.GetResponseAsync();
-                }
-                catch (WebException e)
-                {
-                    Debug.LogError("[CollectionImporter] Request failed: " + e.Message);
-                    continue;
-                }
-
-                if (imageResponse.StatusCode != HttpStatusCode.OK)
-                {
-                    Debug.LogWarning(
-                            "[CollectionImporter] "
-                            + image.url
-                            + ": "
-                            + (int)imageResponse.StatusCode
-                            + " "
-                            + imageResponse.StatusDescription);
-                    continue;
-                }
-
-                Stream imageStream;
-                if ((imageStream = imageResponse.GetResponseStream()) == null)
-                {
-                    Debug.LogWarning(
-                            "[CollectionImporter] Remote host returned no image in response (URL: "
-                            + image.url
-                            + ")");
-                    continue;
-                }
-
-                byte[] imageData = Util.BytesFromStream(imageStream);
-                Texture2D texture = new Texture2D(1, 1);
-                if (!texture.LoadImage(imageData))
-                {
-                    Debug.LogWarning(
-                            "[CollectionImporter] Could not create sprite texture from image (URL: "
-                            + image.url
-                            + ")");
-                    continue;
-                }
+                await Task.Delay(1); // TODO: remove
 
                 Sprite sprite = Sprite.Create(
-                        texture,
-                        new Rect(0.0f, 0.0f, texture.width, texture.height),
+                        image.texture,
+                        new Rect(0.0f, 0.0f, image.texture.width, image.texture.height),
                         new Vector2(0.5f, 0.5f));
                 sprites.Add(image.id, sprite);
             }
