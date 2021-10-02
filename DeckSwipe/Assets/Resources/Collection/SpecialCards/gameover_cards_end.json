@@ -1,7 +1,7 @@
 {
-    "id": "gameover",
-    "characterId": -1,
-    "cardText": "Game Over.",
+    "id": "gameover_cards_end",
+    "characterId": 9,
+    "cardText": "Game Over: Cards End.",
     "leftAction": {
         "text": "",
         "followup": [],

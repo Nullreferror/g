@@ -1,7 +1,7 @@
 {
-    "id": "gameover_0",
+    "id": "gameover_money",
     "characterId": 9,
-    "cardText": "Hunger consumes the city, as food reserves deplete.",
+    "cardText": "Win!",
     "leftAction": {
         "text": "",
         "followup": [],

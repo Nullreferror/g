@@ -82,11 +82,16 @@ namespace DeckSwipe
         {
             for (int i = 0; i < Stats.Count; ++i)
             {
-                if (Stats.GetStat(i) == 0)
+                if (Stats.GetStat(i) >= Stats.MaxStatValue)
                 {
                     SpawnCard(cardStorage.SpecialCard($"gameover_{0}"));
                     return;
                 }
+            }
+            if (Stats.GetMoney() >= Stats.MaxMoneyValue)
+            {
+                SpawnCard(cardStorage.SpecialCard("gameover_money"));
+                return;
             }
 
             IFollowup followup = cardDrawQueue.Next();
@@ -97,8 +102,7 @@ namespace DeckSwipe
             }
             else
             {
-                // TODO: win or lose
-                SpawnCard(cardStorage.SpecialCard("gameover"));
+                SpawnCard(cardStorage.SpecialCard("gameover_cards_end"));
             }
 
             saveIntervalCounter = (saveIntervalCounter - 1) % _saveInterval;

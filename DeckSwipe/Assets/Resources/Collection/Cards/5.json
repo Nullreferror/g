@@ -4,13 +4,13 @@
     "cardText": "The guards bring a woman to you. She yells \"These swine have been pestering me day in day out! When will they leave me alone?\".",
     "leftAction": {
         "text": "Reprimend the guards",
-        "statsModification": [ -2, 2, -2, -2 ],
+        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Leave it be",
-        "statsModification": [ 2, 2, 2, 2 ],
+        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },

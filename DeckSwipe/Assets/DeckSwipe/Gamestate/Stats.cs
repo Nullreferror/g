@@ -8,11 +8,12 @@ namespace DeckSwipe.Gamestate
 {
     public static class Stats
     {
-        public const int Count = 10;
+        public const int Count = 8;
+        public const int MaxStatValue = 32;
+        public const int MaxMoneyValue = 100;
 
-        private const int _maxStatValue = 32;
         private const int _startingStatValue = 16;
-        private const int _startingMoneyValue = 100;
+        private const int _startingMoneyValue = 0;
 
         private static readonly List<StatsDisplay> _changeListeners = new List<StatsDisplay>();
 
@@ -21,7 +22,7 @@ namespace DeckSwipe.Gamestate
 
         public static int GetStat(int i) => stats.ElementAtOrDefault(i);
 
-        public static float GetPercentage(int i) => (float)stats.ElementAtOrDefault(i) / _maxStatValue;
+        public static float GetPercentage(int i) => (float)stats.ElementAtOrDefault(i) / MaxStatValue;
 
         public static int GetMoney() => money;
 
@@ -73,7 +74,7 @@ namespace DeckSwipe.Gamestate
 
         private static int ClampValue(int value)
         {
-            return Mathf.Clamp(value, 0, _maxStatValue);
+            return Mathf.Clamp(value, 0, MaxStatValue);
         }
     }
 }

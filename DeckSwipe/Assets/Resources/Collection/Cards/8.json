@@ -4,13 +4,13 @@
     "cardText": "Sample card 1",
     "leftAction": {
         "text": "Sample action 1L",
-        "statsModification": [ -2, 2, -2, -2 ],
+        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Sample action 1R",
-        "statsModification": [ 2, 2, 2, 2 ],
+        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },

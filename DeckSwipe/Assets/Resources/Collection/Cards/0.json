@@ -4,13 +4,13 @@
     "cardText": "This is a test card text that should appear on screen.",
     "leftAction": {
         "text": "Here goes",
-        "statsModification": [ -4, 4, -2, -2 ],
+        "statsModification": [ -4, 4, -2, -2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "There goes",
-        "statsModification": [ 2, 0, -6, -2 ],
+        "statsModification": [ 2, 0, -6, -2, 2, 2, 2, 2 ],
         "followup": [
             {
                 "id": 1,

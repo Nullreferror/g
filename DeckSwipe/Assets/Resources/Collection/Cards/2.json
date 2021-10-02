@@ -4,13 +4,13 @@
     "cardText": "The hothouse is very cold. The crops are freezing up. What should we do?",
     "leftAction": {
         "text": "Turn on the heater in the hothouse",
-        "statsModification": [ -2, 2, -2, -2 ],
+        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Put the generator in overdrive",
-        "statsModification": [ 2, 2, 2, 2 ],
+        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },

@@ -4,13 +4,13 @@
     "cardText": "The scouts find 2 steam cores and a shipment of wood on board the ship. A crew had been trying to survive in the wreck but everybody's dead now.",
     "leftAction": {
         "text": "",
-        "statsModification": [ -2, 2, -2, -2 ],
+        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "",
-        "statsModification": [ 2, 2, 2, 2 ],
+        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },

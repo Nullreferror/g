@@ -4,13 +4,13 @@
     "cardText": "Cample card 2",
     "leftAction": {
         "text": "Sample action 2L",
-        "statsModification": [ -2, 2, -2, -2 ],
+        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "Sample action 2R",
-        "statsModification": [ 2, 2, 2, 2 ],
+        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
         "followup": [],
         "specialFollowup": []
     },
