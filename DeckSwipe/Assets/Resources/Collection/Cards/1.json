@@ -1,16 +1,16 @@
 {
     "id": 1,
-    "characterId": 1,
-    "cardText": "And this is yet another card that you may encounter in the game. Are you having fun thus far?",
+    "characterId": -1,
+    "cardText": "This is startd card 2.",
     "leftAction": {
-        "text": "No",
-        "statsModification": [ -2, 2, -2, -2, -2, -2, -2, -2 ],
+        "text": "Here goes",
+        "statsModification": [ 5, 5, 5, 5, 5, 5, 5, 5 ],
         "followup": [],
         "specialFollowup": []
     },
     "rightAction": {
-        "text": "Yes",
-        "statsModification": [ 2, 2, 2, 2, 2, 2, 2, 2 ],
+        "text": "There goes",
+        "statsModification": [ 5, 5, 5, 5, 5, 5, 5, 5 ],
         "followup": [],
         "specialFollowup": []
     },

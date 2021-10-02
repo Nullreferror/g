@@ -75,7 +75,16 @@ namespace DeckSwipe
         {
             Stats.ResetStats();
             ProgressDisplay.SetDaysSurvived(0);
-            DrawNextCard();
+
+            ICard card = cardStorage.ForId(0);
+            if (card != null)
+            {
+                SpawnCard(card);
+            }
+            else
+            {
+                DrawNextCard();
+            }
         }
 
         public void DrawNextCard()

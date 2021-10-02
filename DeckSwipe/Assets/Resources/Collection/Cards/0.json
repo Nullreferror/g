@@ -1,20 +1,25 @@
 {
     "id": 0,
-    "characterId": 0,
-    "cardText": "This is a test card text that should appear on screen.",
+    "characterId": -1,
+    "cardText": "This is startd card 1.",
     "leftAction": {
         "text": "Here goes",
-        "statsModification": [ -4, 4, -2, -2, 2, 2, 2, 2 ],
-        "followup": [],
+        "statsModification": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
+        "followup": [
+            {
+                "id": 1,
+                "delay": 0
+            }
+        ],
         "specialFollowup": []
     },
     "rightAction": {
         "text": "There goes",
-        "statsModification": [ 2, 0, -6, -2, 2, 2, 2, 2 ],
+        "statsModification": [ 0, 0, 0, 0, 0, 0, 0, 0 ],
         "followup": [
             {
                 "id": 1,
-                "delay": 1
+                "delay": 0
             }
         ],
         "specialFollowup": []

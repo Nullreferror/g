@@ -215,7 +215,7 @@ namespace DeckSwipe.CardModel.Import
                 }
                 if (specialCards.ContainsKey(protoSpecialCard.id))
                 {
-                    Debug.LogWarning("[CollectionImporter] Duplicate id found in SpecialCards");
+                    Debug.LogWarning($"[CollectionImporter] Duplicate {protoSpecialCard.id} found in SpecialCards");
                     continue;
                 }
 

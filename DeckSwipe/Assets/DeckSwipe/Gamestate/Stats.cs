@@ -9,10 +9,10 @@ namespace DeckSwipe.Gamestate
     public static class Stats
     {
         public const int Count = 8;
-        public const int MaxStatValue = 32;
+        public const int MaxStatValue = 100;
         public const int MaxMoneyValue = 100;
 
-        private const int _startingStatValue = 16;
+        private const int _startingStatValue = 0;
         private const int _startingMoneyValue = 0;
 
         private static readonly List<StatsDisplay> _changeListeners = new List<StatsDisplay>();
