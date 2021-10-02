@@ -8,7 +8,6 @@ namespace DeckSwipe.World
 {
     public class StatsDisplay : MonoBehaviour
     {
-        public Image money;
         public List<Image> bars;
         public float relativeMargin;
 
@@ -32,19 +31,6 @@ namespace DeckSwipe.World
             for (int i = 0; i < bars.Count; ++i)
             {
                 bars[i].fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.GetStatPercentage(i));
-            }
-            money.fillAmount = Mathf.Lerp(minFillAmount, maxFillAmount, Stats.GetMoneyPercentage());
-            if (Stats.GetMoney() == 0)
-            {
-                money.color = Color.grey;
-            }
-            else if (Stats.GetMoney() > 0)
-            {
-                money.color = Color.green;
-            }
-            else
-            {
-                money.color = Color.red;
             }
         }
     }
