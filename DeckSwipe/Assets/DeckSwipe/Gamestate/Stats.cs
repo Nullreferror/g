@@ -27,17 +27,7 @@ namespace DeckSwipe.Gamestate
 
         public static int GetMoney() => money;
 
-        public static float GetMoneyPercentage()
-        {
-            if (money >= 0)
-            {
-                return (float)money / MaxMoneyValue;
-            }
-            else
-            {
-                return 1.0f - (float)Math.Abs(money) / MaxMoneyValue;
-            }
-        }
+        public static float GetMoneyPercentage() => (float)Math.Abs(money) / MaxMoneyValue;
 
         public static void ApplyModification(StatsModification mod)
         {
