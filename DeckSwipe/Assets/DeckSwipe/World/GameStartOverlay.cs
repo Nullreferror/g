@@ -17,7 +17,6 @@ namespace DeckSwipe.World
             FadingBlackToVisible,
             Visible,
             FadingVisibleToHidden
-
         }
 
         private const float _fadeDuration = 0.5f;
@@ -31,8 +30,6 @@ namespace DeckSwipe.World
         public Image backgroundImage;
         public Image blackSlate;
         public TextMeshProUGUI currentTimeText;
-        public TextMeshProUGUI daysSurvivedLabel;
-        public TextMeshProUGUI daysSurvivedText;
 
         private static float rewindStartDays;
 
@@ -231,16 +228,12 @@ namespace DeckSwipe.World
         {
             backgroundImage.enabled = enabled;
             currentTimeText.enabled = enabled;
-            daysSurvivedLabel.enabled = enabled;
-            daysSurvivedText.enabled = enabled;
         }
 
         private void SetOverlayAlpha(float alpha)
         {
             SetColorAlpha(backgroundImage, alpha);
             SetColorAlpha(currentTimeText, alpha);
-            SetColorAlpha(daysSurvivedLabel, alpha);
-            SetColorAlpha(daysSurvivedText, alpha);
         }
 
         private void SetOverlayVisible(bool visible)

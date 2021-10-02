@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DeckSwipe.Gamestate;
 using Outfrost;
 using TMPro;
 using UnityEngine;
@@ -42,7 +43,8 @@ namespace DeckSwipe.World
 
         private void SetDisplay(int days)
         {
-            daysSurvivedText.text = days.ToString();
+            //daysSurvivedText.text = days.ToString();
+            daysSurvivedText.text = Stats.GetMoney().ToString() + " billions";
         }
     }
 }
